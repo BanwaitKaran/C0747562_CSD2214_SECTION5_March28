@@ -9,21 +9,23 @@
         var XHobj=false;
         if(window.XMLHttpRequest){
             //code for IE6,IE5,Google chrome, Firefox, Web Browser
+            XHobj=new XMLHttpRequest();
+        }
+        else {
             XHobj=new ActiveXObject("Microsoft.XMLHTTP");
         }
-        else if(window.ActiveXObject){
-            XHobj=new ActiveXObject("Microsoft.XMLHTTP");
-            function fetchdata(datasource,divID){
-                if(XHobj){
-                    XHobj.open("GET",datasource);
-                    XHobj.onreadystatechange=function(){
-                        if(XHobj.readyState==4 && XHobj.status==200)
-                        document.getElementById(divID).innerHTML=XHobj.responseText;
-                    }    
-                }
+        
+        function fetchdata(datasource,divID){
+            if(XHobj){
+                XHobj.open("GET",datasource);
+                XHobj.onreadystatechange=function(){
+                    if(XHobj.readyState==4 && XHobj.status==200)
+                    document.getElementById(divID).innerHTML+=XHobj.responseText;
+                }    
+                XHobj.send();
             }
-            XHobj.send(null);
         }
+           
     </script>
 </head>
 <body>
