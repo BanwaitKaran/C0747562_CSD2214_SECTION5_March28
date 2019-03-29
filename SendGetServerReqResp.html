@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ajax</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script language="javascript">
+        var XHobj=false;
+        if(window.XMLHttpRequest){
+            //code for IE6,IE5,Google chrome, Firefox, Web Browser
+            XHobj=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        else if(window.ActiveXObject){
+            XHobj=new ActiveXObject("Microsoft.XMLHTTP");
+            function fetchdata(datasource,divID){
+                if(XHobj){
+                    XHobj.open("GET",datasource);
+                    XHobj.onreadystatechange=function(){
+                        if(XHobj.readyState==4 && XHobj.status==200)
+                        document.getElementById(divID).innerHTML=XHobj.responseText;
+                    }    
+                }
+            }
+            XHobj.send(null);
+        }
+    </script>
+</head>
+<body>
+    <h3>Welcome to AJAX</h3>
+    <form>
+        <input type="button" value="Fetch Message" onclick="fetchdata('info.txt','myDiv')" />
+    </form>
+    <div id="myDiv"><b>AJAX applications are browser and platform independent.:</b></div>
+</body>
+</html>
